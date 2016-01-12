@@ -1,6 +1,6 @@
 # react-flexbox-layout
 
-Simple flexible layouts for IE9+.
+Simple flexible layout components to use a standard API on top of CSS Flex implementations.
 
 ## Rationale
 
@@ -12,7 +12,7 @@ The most common use case is a series of elements laid out in a row or column wit
 
 `react-flexbox-layout` components expose a subset of flexbox functionality.
 
-For Chrome, Firefox, IE10+, and Safari, native flexbox is used. For IE9, a Javascript shim is used.
+For Chrome, Firefox, IE10+, and Safari, native flexbox is used.
 
 ## Concepts
 
@@ -30,7 +30,7 @@ For Chrome, Firefox, IE10+, and Safari, native flexbox is used. For IE9, a Javas
 * `justifyItems: (left|center|right)`: how to horizontally align children relative to this element. applies when no elements have `flexGrow`
 * `gutter: number`: amount of spacing between child elements
 * `gutterUnit: string`: e.g., `px`, `rem`
-* `onLayout: func`: called after flexbox layout has been calculated (mainly used for IE9)
+* `onLayout: func`: called after flexbox layout has been calculated (only use it if you really know why you need it)
 * `children: node(s)`: if you'd like to apply additional layout customization, use an `HLayoutItem` (see below)
 
 ### `HLayoutItem`
@@ -45,7 +45,7 @@ For Chrome, Firefox, IE10+, and Safari, native flexbox is used. For IE9, a Javas
 * `justifyItems: (left|center|right|stretch)`: how to horizontally align children relative to this element.
 * `gutter: number`: amount of spacing between child elements
 * `gutterUnit: string`: e.g., `px`, `rem`
-* `onLayout: func`: called after flexbox layout has been calculated (mainly used for IE9)
+* `onLayout: func`: called after flexbox layout has been calculated (only use it if you really know why you need it)
 * `children: node(s)`: if you'd like to apply additional layout customization, use an `VLayoutItem` (see below)
 
 ### `VLayoutItem`
@@ -55,39 +55,13 @@ For Chrome, Firefox, IE10+, and Safari, native flexbox is used. For IE9, a Javas
 * `gutterBottom`: overrides parent `VLayout`s `gutter`
 * `children: node`: **MUST** be a single child
 
-### `requestNextLayoutMinDelay(n)`
-Request that the next layout occur **at least** this `n` milliseconds from now. Only applies for IE9. Useful for debouncing layouts after rapidly occuring events like keypresses. See `/examples/debounce/app.jsx` for example usage.
-
 ## Gotchas
 
 ### `LayoutItem`s must have style: `box-sizing: border-box`.
 The easiest way to do this is to define this CSS: `* { box-sizing: border-box }`
 ### Flexbox wrapping is not supported.
 `LayoutItems` will simply overflow if they're too big. This is the CSS equivalent to `* { flex-wrap: nowrap }`
-### Scroll position in IE9 is not preserved between layouts
-The JS layout algorithm used in the IE9 shim needs to unset certain styles in order to measure the intrinsic heights of elements. This may cause your scrollable elements to lose their scroll position.
 
-In cases where scroll position is being lost, you should manually save the scroll position before the calculation, and restore the scroll position afterwards.
-
-```jsx
-class MyScrollingContainer extends React.Component {
-  componentWillUpdate() {
-    this._scrollPos = ReactDOM.findDOMNode(this).scrollTop;
-  }
-
-  restoreScroll() {
-    ReactDOM.findDOMNode(this).scrollTop = this._scrollPos;
-  }
-
-  render() {
-    return (
-      <VLayout onLayout={this.restoreScroll.bind(this)}>
-        // lots of content
-      </VLayout>
-    )
-  }
-}
-```
 ### Percentage widths
 When `gutter`s are applied, dimensions won't add 100% because gutters add a non-percentage width. Use `flexGrow` to take up remaining space instead. e.g.
 ```jsx
@@ -139,4 +113,3 @@ import {EXPAND_CHILD} from `react-flexbox-layout`;
 * Install deps: `npm install`
 * Run watcher: `npm run watch`
 * Run examples server: `npm run examples`, `http://localhost:8080`
-
