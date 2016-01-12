@@ -1,9 +1,10 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { HLayout, HLayoutItem, requestNextLayoutMinDelay } from 'react-flexbox-layout';
 
 class FocusedInput extends React.Component {
   componentDidMount() {
-    React.findDOMNode(this).focus();
+    ReactDOM.findDOMNode(this).focus();
   }
 
   render() {
@@ -13,7 +14,7 @@ class FocusedInput extends React.Component {
   }
 
   _onBlur() {
-    React.findDOMNode(this).focus();
+    ReactDOM.findDOMNode(this).focus();
   }
 }
 
@@ -59,4 +60,4 @@ class App extends React.Component {
   }
 }
 
-React.render(<App />, document.getElementById("example"));
+ReactDOM.render(<App />, document.getElementById("example"));

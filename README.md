@@ -72,11 +72,11 @@ In cases where scroll position is being lost, you should manually save the scrol
 ```jsx
 class MyScrollingContainer extends React.Component {
   componentWillUpdate() {
-    this._scrollPos = React.findDOMNode(this).scrollTop;
+    this._scrollPos = ReactDOM.findDOMNode(this).scrollTop;
   }
 
   restoreScroll() {
-    React.findDOMNode(this).scrollTop = this._scrollPos;
+    ReactDOM.findDOMNode(this).scrollTop = this._scrollPos;
   }
 
   render() {

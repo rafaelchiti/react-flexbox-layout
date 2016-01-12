@@ -21,7 +21,7 @@
     "curly": 0,
     "no-trailing-spaces": 0,
     "semi-spacing": 0,
-    "semi-spacing": 0,
+    "react/jsx-uses-react": [2],
     "no-unused-expressions": 0,
     "dot-notation": [2, {"allowPattern": "^NODE_ENV$"}],
     "comma-dangle": 0,
