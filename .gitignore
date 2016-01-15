@@ -2,8 +2,6 @@
 dump.rdb
 node_modules
 npm-debug.log
-lib/
-dist/
 *.swp
 *.swo
 *.log

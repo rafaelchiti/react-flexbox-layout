@@ -1,3 +1,13 @@
+```
+#############################################################
+##                                                         ##
+## IMPORTANT: Super hacky version to make it work on IE9   ##
+##                                                         ##
+#############################################################
+
+```
+
+
 # react-flexbox-layout
 
 Simple flexible layouts for IE9+.
